@@ -25,6 +25,12 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+app.get("/hello",(req,res)=>{
+    res.json({
+        message:"Deployed successfully"
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
 });
