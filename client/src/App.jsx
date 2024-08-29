@@ -8,21 +8,24 @@ import Navbar from "./components/Navbar";
 import store from './store/store';
 import {Provider} from 'react-redux'
 import Footer from "./components/Footer";
+import WriteBlog from "./components/WriteBlog";
 
 function App() {
 
   return (
     <Provider store={store}>
       <div>
-        <Router>
+      <Router>
           <Navbar/>
 
           {/* routes */}
+        
           <Routes>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/quotes" element={<Quotes/>}/>
             <Route path="/myquotes" element={<MyForm/>}/>
+            <Route path="/write" element={<WriteBlog/>}/>
           </Routes>
         </Router>
 

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const myLogger = async (req, res, next) => {
     try {
         const token = req.cookies?.token; // Get the token from cookies
-        console.log(token)
+        console.log('token:',token)
 
         if (!token) {
             return res.status(401).json({ message: 'Token is required' });

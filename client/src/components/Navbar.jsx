@@ -21,7 +21,10 @@ const Navbar = () => {
               </div>
               ):
             (
-              <div className={`${buttons} rounded-full`}>{user}</div>
+              <div>
+                <div className={`${buttons} rounded-full`}>{user}</div>
+                <Link to="/write">Write Blog</Link>
+              </div>
             )
 
           }

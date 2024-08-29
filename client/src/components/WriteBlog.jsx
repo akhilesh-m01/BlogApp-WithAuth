@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const WriteBlog = () => {
 
@@ -8,12 +9,47 @@ const WriteBlog = () => {
         image:""
     })
 
+    const handleChange = (e) =>{
+      setBlog({
+        ...blog,
+        [e.target.name] : e.target.value
+      })
+    }
+
+    const handleFileChange = (e) => {
+      setBlog({
+        ...blog,
+        image: e.target.files[0], // Set the file directly
+      });
+    };
+
+    const handleSubmit = async (e) =>{
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('title', blog.title);
+      formData.append('desc', blog.desc);
+      if (blog.image) {
+        formData.append('image', blog.image);
+      }
+
+      const res = await axios.post("http://localhost:3000/user/myblog", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+        withCredentials: true 
+      });
+      
+    }
+
   return (
     <div>
-        <Form onSubmit={handleSubmit}>
-            <input type='text' name="title" value={blog.title} onChange={handleChange}/>
-            <input type='text' name="desc" value={blog.desc} onChange={handleChange}/>
-        </Form>
+        <form onSubmit={handleSubmit}>
+            <input type='text' placeholder='Title' name="title" value={blog.title} onChange={handleChange}/>
+            <input type='text' placeholder='Description' name="desc" value={blog.desc} onChange={handleChange}/>
+            <input type='file' name="image" onChange={handleFileChange}/>
+            <button type='submit'>Submit</button>
+        </form>
     </div>
   )
 }
