@@ -33,7 +33,9 @@ const WriteBlog = () => {
         formData.append('image', blog.image);
       }
 
-      const res = await axios.post("http://localhost:3000/user/myblog", formData, {
+      const BACKEND_URL = process.env.BACKEND_URL | "http://localhost:3000" ;
+
+      const res = await axios.post(`${BACKEND_URL}/user/myblog`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data', 
         },

@@ -27,10 +27,12 @@ const Login = () => {
 
     }
 
+    const BACKEND_URL = process.env.BACKEND_URL | "http://localhost:3000" ;
+
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3000/user/signin", luser,{
+            const res = await axios.post(`${BACKEND_URL}/user/signin`, luser,{
                 withCredentials:true,
                 headers: {
                     'Content-Type': 'application/json'

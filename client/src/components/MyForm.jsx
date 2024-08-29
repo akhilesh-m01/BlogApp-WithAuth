@@ -7,6 +7,7 @@ const MyForm = () => {
         title:"",
         desc:""
     })
+    const BACKEND_URL = process.env.BACKEND_URL | "http://localhost:3000" ;
 
 
     const handleChange = (e) =>{
@@ -23,7 +24,7 @@ const MyForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         // post in the backend
-        const res = await axios.post("http://localhost:3000/user/myquotes",quote,{headers});
+        const res = await axios.post(`${BACKEND_URL}/user/myquotes`,quote,{headers});
         console.log(res)
     }
   return (

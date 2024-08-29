@@ -16,11 +16,13 @@ const Signup = () => {
         })
     }
 
+    const BACKEND_URL = process.env.BACKEND_URL | "http://localhost:3000" ;
+
     const submitHandler = async (e) =>{
         e.preventDefault();
         console.log(user)
         try{
-            const res = await axios.post('http://localhost:3000/user/signup',user);
+            const res = await axios.post(`${BACKEND_URL}/user/signup`,user);
             console.log(res);
         }
         catch(e){
