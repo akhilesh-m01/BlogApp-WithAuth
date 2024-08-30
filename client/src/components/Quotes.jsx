@@ -13,8 +13,7 @@ const Quotes = () => {
   useEffect(() => {
     // const token = sessionStorage.getItem("token");
     // const token = ?
-    const BACKEND_URL = process.env.BACKEND_URL | "http://localhost:3000" ;
-
+    const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:3000";
     fetch(`${BACKEND_URL}/user/quotes`, {
       method: 'GET',
       credentials: 'include', // Include cookies with the request
