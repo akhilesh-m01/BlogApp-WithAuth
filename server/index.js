@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000;
 dbConnect();
 
 const allowedOrigins = ['http://localhost:5173', 'https://blog-app-client1.vercel.app'];
-
+// cors
 const corsOptions = {
     origin: (origin, callback) => {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -23,6 +23,7 @@ const corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200
 };
+
 
 app.use(cors(corsOptions));
 
