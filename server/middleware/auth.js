@@ -6,7 +6,7 @@ const myLogger = async (req, res, next) => {
         console.log('token:',token)
 
         if (!token) {
-            return res.status(401).json({ message: 'Token is required' });
+            return res.status(401).json({ message: 'Token is required',token });
         }
 
         // Verify the token
