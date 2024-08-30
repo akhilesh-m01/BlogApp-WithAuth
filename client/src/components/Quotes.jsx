@@ -12,7 +12,7 @@ const Quotes = () => {
 
   console.log("NODE_ENV:", process.env.NODE_ENV);
   console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   console.log("BACKEND_URL:", BACKEND_URL);
 
   const fetchQuotes = useCallback(async () => {
