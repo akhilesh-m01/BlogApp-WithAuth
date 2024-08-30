@@ -1,60 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 
 const Quotes = () => {
   const [quotes, setQuotes] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);
-  const BACKEND_URL = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_BACKEND_URL
-  : "http://localhost:3000";
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+
+  const fetchQuotes = useCallback(async () => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/user/quotes`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch quotes');
+      }
+
+      const data = await res.json();
+      setQuotes(data);
+    } catch (error) {
+      console.error('Error fetching quotes:', error);
+      setError(error.message);
+      if (!isAuthenticated) {
+        navigate('/login');
+      }
+    }
+  }, [BACKEND_URL, navigate, isAuthenticated]);
 
   useEffect(() => {
-   
-    fetch(`${BACKEND_URL}/user/quotes`, {
-      method: 'GET',
-      credentials: 'include', // Include cookies with the request
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error('Failed to fetch quotes');
-        }
-      })
-      .then(data => {
-        setQuotes(data)
-      })
-      .catch(error => {
-        console.error('Error fetching quotes:', error);
-        navigate('/login');
-      });
-  }, []);
+    if (isAuthenticated) {
+      fetchQuotes();
+    }
+  }, [isAuthenticated, fetchQuotes]);
+
+  if (!isAuthenticated) {
+    return <Login />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <>
-    {
-      isAuthenticated ? (
-        <div>
-          <h1>Quotes</h1>
-          <ul>
-            {quotes.map((q, index) => (
-              <li key={index}>{q.quote}</li>
-            ))}
-          </ul>
-        </div>
-      ):(
-        <Login/>
-      )
-    }
-    </>
-    
+    <div>
+      <h1>Quotes</h1>
+      {quotes.length === 0 ? (
+        <p>No quotes available.</p>
+      ) : (
+        <ul>
+          {quotes.map((q, index) => (
+            <li key={index}>{q.quote}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 
