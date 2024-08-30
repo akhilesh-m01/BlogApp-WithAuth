@@ -31,10 +31,11 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            console.log("environment:",process.env.NODE_ENV)
             console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
             const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
             console.log("BACKEND_URL:", BACKEND_URL);
-            
+
             const res = await axios.post(`${BACKEND_URL}/user/signin`, luser,{
                 withCredentials:true,
                 headers: {
