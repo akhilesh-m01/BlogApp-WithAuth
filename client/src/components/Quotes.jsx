@@ -8,12 +8,12 @@ const Quotes = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);
-
-
-  useEffect(() => {
-    const BACKEND_URL = process.env.NODE_ENV === 'production'
+  const BACKEND_URL = process.env.NODE_ENV === 'production'
   ? process.env.BACKEND_URL
   : "http://localhost:3000";
+
+  useEffect(() => {
+   
     fetch(`${BACKEND_URL}/user/quotes`, {
       method: 'GET',
       credentials: 'include', // Include cookies with the request
