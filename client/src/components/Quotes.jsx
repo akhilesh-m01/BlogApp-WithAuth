@@ -20,7 +20,7 @@ const Quotes = () => {
       const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
       console.log("BACKEND_URL:", BACKEND_URL);
 
-      const res = await fetch(`${BACKEND_URL}/user/quotes`, {
+      const result = await fetch(`${BACKEND_URL}/user/quotes`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -28,11 +28,13 @@ const Quotes = () => {
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch quotes');
-      }
+      // if (!res.ok) {
+      //   throw new Error('Failed to fetch quotes');
+      // }
 
-      const data = await res.json();
+
+      const data = await result.json();
+      console.log(data)
       setQuotes(data);
     } catch (error) {
       console.error('Error fetching quotes:', error);
