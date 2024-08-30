@@ -43,7 +43,7 @@ const Quotes = () => {
         navigate('/login');
       }
     }
-  }, [BACKEND_URL, navigate, isAuthenticated]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isAuthenticated) {
