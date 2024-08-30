@@ -9,7 +9,7 @@ const Quotes = () => {
 
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);
   const BACKEND_URL = process.env.NODE_ENV === 'production'
-  ? process.env.BACKEND_URL
+  ? process.env.REACT_APP_BACKEND_URL
   : "http://localhost:3000";
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Quotes = () => {
         console.error('Error fetching quotes:', error);
         navigate('/login');
       });
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <>
