@@ -27,10 +27,11 @@ const Login = () => {
 
     }
 
-    const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            console.log("login handler")
             console.log("environment:",process.env.NODE_ENV)
             console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
             const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
