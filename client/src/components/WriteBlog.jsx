@@ -33,7 +33,7 @@ const WriteBlog = () => {
         formData.append('image', blog.image);
       }
 
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+      const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
       const res = await axios.post(`${BACKEND_URL}/user/myblog`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data', 

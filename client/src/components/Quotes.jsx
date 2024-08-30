@@ -10,16 +10,14 @@ const Quotes = () => {
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  console.log("NODE_ENV:", process.env.NODE_ENV);
-  console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
-  console.log("BACKEND_URL:", BACKEND_URL);
+  
+  const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+
 
   const fetchQuotes = useCallback(async () => {
     try {
-      console.log("environment:",process.env.NODE_ENV)
-      console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+      
+      const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
       console.log("BACKEND_URL:", BACKEND_URL);
 
       const res = await fetch(`${BACKEND_URL}/user/quotes`, {

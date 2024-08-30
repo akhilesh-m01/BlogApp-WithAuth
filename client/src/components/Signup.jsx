@@ -16,7 +16,7 @@ const Signup = () => {
         })
     }
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+    const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
     const submitHandler = async (e) =>{
         e.preventDefault();
         console.log(user)
