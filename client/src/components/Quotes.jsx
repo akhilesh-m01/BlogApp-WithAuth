@@ -17,6 +17,10 @@ const Quotes = () => {
 
   const fetchQuotes = useCallback(async () => {
     try {
+      console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+      console.log("BACKEND_URL:", BACKEND_URL);
+      
       const res = await fetch(`${BACKEND_URL}/user/quotes`, {
         method: 'GET',
         credentials: 'include',
