@@ -57,8 +57,9 @@ const signIn = async (req, res) => {
         res
         .status(200)
         .cookie('token', token, {
-            secure: true, // Use true if using HTTPS
+            secure: process.env.NODE_ENV === 'production', // Ensure secure is true in production
             httpOnly: true,
+            sameSite: 'strict', // To ensure that cookies are only sent for same-site requests
         })
         .json({
             token: token,
