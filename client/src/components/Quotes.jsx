@@ -19,18 +19,20 @@ const Quotes = () => {
       const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
       console.log("BACKEND_URL:", BACKEND_URL);
 
-      const result = await fetch(`${BACKEND_URL}/user/quotes`, {
+      const response = await fetch(`${BACKEND_URL}/user/quotes`, {
         method: 'GET',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
+  
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
 
-      // if (!res.ok) {
-      //   throw new Error('Failed to fetch quotes');
-      // }
-
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
       const data = await result.json();
       console.log(data)
