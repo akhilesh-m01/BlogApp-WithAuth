@@ -57,9 +57,10 @@ const signIn = async (req, res) => {
         res
         .status(200)
         .cookie('token', token, {
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
             httpOnly: true,
-          })
+            sameSite: 'None',
+        })
         .json({
             token: token,
             message: "User logged in",
