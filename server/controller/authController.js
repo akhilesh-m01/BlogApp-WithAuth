@@ -57,7 +57,7 @@ const signIn = async (req, res) => {
         res
         .status(200)
         .cookie('token', token, {
-            secure: false, // Use true if using HTTPS
+            secure: true, // Use true if using HTTPS
             httpOnly: true,
         })
         .json({
