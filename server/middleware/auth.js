@@ -2,13 +2,14 @@ const jwt = require('jsonwebtoken');
 
 const myLogger = async (req, res, next) => {
     try {
-        const token = await req.cookies?.token; // Get the token from cookies
+        const token = req.cookies?.token;
         console.log(req.cookies.token)
         console.log('token:',token)
 
         if (!token) {
-            return res.status(401).json({ message: 'Token is required',token1:token });
+            return res.status(401).json({ message: 'Token is required', token });
         }
+        
 
         // Verify the token
         jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
