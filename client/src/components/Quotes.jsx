@@ -34,7 +34,7 @@ const Quotes = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await result.json();
+      const data = await response.json();
       console.log(data)
       setQuotes(data);
     } catch (error) {

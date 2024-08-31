@@ -60,6 +60,7 @@ const signIn = async (req, res) => {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,
             sameSite: 'None',
+            path: '/',
         })
         .json({
             token: token,
