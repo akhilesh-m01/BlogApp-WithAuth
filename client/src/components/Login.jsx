@@ -27,12 +27,12 @@ const Login = () => {
 
     }
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            
-            const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+            // const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+            const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
             console.log("BACKEND_URL:", BACKEND_URL);
 
             const res = await axios.post(`${BACKEND_URL}/user/signin`, luser,{

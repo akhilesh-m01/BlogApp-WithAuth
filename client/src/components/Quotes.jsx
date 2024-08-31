@@ -11,13 +11,12 @@ const Quotes = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   
-  const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
-
 
   const fetchQuotes = useCallback(async () => {
     try {
       
-      const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+      // const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+      const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
       console.log("BACKEND_URL:", BACKEND_URL);
 
       const result = await fetch(`${BACKEND_URL}/user/quotes`, {
@@ -41,7 +40,7 @@ const Quotes = () => {
       setError(error.message);
       if (!isAuthenticated) {
         navigate('/login');
-      }
+      } 
     }
   }, [isAuthenticated]);
 

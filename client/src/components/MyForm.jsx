@@ -7,8 +7,8 @@ const MyForm = () => {
         title:"",
         desc:""
     })
-    const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
-
+    // const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     const handleChange = (e) =>{
         setQuote({
             ...quote,
