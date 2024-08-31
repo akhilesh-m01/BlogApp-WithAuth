@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 4000;
 
 dbConnect();
 
-const allowedOrigins = ['*','http://localhost:5173', 'https://blog-app-client1.vercel.app'];
+const allowedOrigins = ['https://blog-app-client-eosin.vercel.app','http://localhost:5173'];
 // cors
 const corsOptions = {
     origin: (origin, callback) => {
