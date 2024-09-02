@@ -59,7 +59,7 @@ const signIn = async (req, res) => {
         .cookie('token', token, {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,
-            sameSite: 'Lax',
+            sameSite: 'None',
             path: '/',
         })
         .json({
