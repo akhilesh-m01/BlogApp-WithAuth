@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 4000;
 
 dbConnect();
 
-// const allowedOrigins = ['https://blog-app-client-eosin.vercel.app','http://localhost:5173'];
+// const allowedOrigins = ['https://blogapp-withauth.onrender.com','http://localhost:5173'];
 // cors
 const corsOptions = {
-    origin: ["https://blog-app-client-eosin.vercel.app","http://localhost:5173"],
+    origin: ["https://blogapp-withauth.onrender.com","http://localhost:5173"],
     credentials: true,
     optionsSuccessStatus: 200
 };
