@@ -13,7 +13,7 @@ dbConnect();
 // const allowedOrigins = ['https://blogapp-withauth.onrender.com','http://localhost:5173'];
 // cors
 const corsOptions = {
-    origin: ["https://blogapp-withauth.onrender.com","http://localhost:5173"],
+    origin: ["https://blogapp-withauth.onrender.com"],
     credentials: true,
     optionsSuccessStatus: 200
 };
