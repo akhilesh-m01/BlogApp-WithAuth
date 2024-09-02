@@ -11,32 +11,22 @@ const Quotes = () => {
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  
-
   const fetchQuotes = useCallback(async () => {
     try {
-      
-      // const BACKEND_URL = "https://blog-app-server1.vercel.app" || "http://localhost:3000";
       const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
       console.log("BACKEND_URL:", BACKEND_URL);
 
       const response = await axios.get(`${BACKEND_URL}/user/quotes`, {
-        withCredentials:true,
+        withCredentials: true,
         headers: {
-              'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         }
       });
   
       console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
+      console.log('Response data:', response.data);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data)
-      setQuotes(data);
+      setQuotes(response.data);
     } catch (error) {
       console.error('Error fetching quotes:', error);
       setError(error.message);
@@ -44,13 +34,13 @@ const Quotes = () => {
         navigate('/login');
       } 
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (isAuthenticated) {
       fetchQuotes();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, fetchQuotes]);
 
   if (!isAuthenticated) {
     return <Login />;
