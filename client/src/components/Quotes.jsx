@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
+import axios from 'axios';
 
 const Quotes = () => {
   const [quotes, setQuotes] = useState([]);
@@ -19,12 +20,11 @@ const Quotes = () => {
       const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
       console.log("BACKEND_URL:", BACKEND_URL);
 
-      const response = await fetch(`${BACKEND_URL}/user/quotes`, {
-        method: 'GET',
-        credentials: 'include',
+      const response = await axios.get(`${BACKEND_URL}/user/quotes`, {
+        withCredentials:true,
         headers: {
-          'Content-Type': 'application/json',
-        },
+              'Content-Type': 'application/json'
+        }
       });
   
       console.log('Response status:', response.status);
@@ -50,7 +50,7 @@ const Quotes = () => {
     if (isAuthenticated) {
       fetchQuotes();
     }
-  }, [isAuthenticated, fetchQuotes]);
+  }, [isAuthenticated]);
 
   if (!isAuthenticated) {
     return <Login />;

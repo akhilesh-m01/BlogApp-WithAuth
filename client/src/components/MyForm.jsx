@@ -23,7 +23,12 @@ const MyForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         // post in the backend
-        const res = await axios.post(`${BACKEND_URL}/user/myquotes`,quote,{headers});
+        const res = await axios.post(`${BACKEND_URL}/user/myquotes`,quote,{
+            withCredentials:true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         console.log(res)
     }
   return (
