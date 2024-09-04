@@ -5,15 +5,18 @@ import Login from "./components/Login";
 import Quotes from "./components/Quotes";
 import MyForm from "./components/MyForm";
 import Navbar from "./components/Navbar";
-import store from './store/store';
+// import store from './store/store';
 import {Provider} from 'react-redux'
 import Footer from "./components/Footer";
 import WriteBlog from "./components/WriteBlog";
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store/store'
 
 function App() {
 
   return (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <div>
       <Router>
           <Navbar/>
@@ -31,6 +34,7 @@ function App() {
 
         <Footer/>
       </div>
+      </PersistGate>
     </Provider>
   );
 }

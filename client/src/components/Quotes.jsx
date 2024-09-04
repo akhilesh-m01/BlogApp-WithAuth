@@ -5,50 +5,28 @@ import Login from './Login';
 import axios from 'axios';
 
 const Quotes = () => {
-  const [quotes, setQuotes] = useState([]);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-  const fetchQuotes = useCallback(async () => {
-    try {
-      const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-      console.log("BACKEND_URL:", BACKEND_URL);
-
-      const response = await axios.get(`${BACKEND_URL}/user/quotes`, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      console.log('Response status:', response.status);
-      console.log('Response data:', response.data);
-
-      setQuotes(response.data);
-    } catch (error) {
-      console.error('Error fetching quotes:', error);
-      setError(error.message);
-      if (!isAuthenticated) {
-        navigate('/login');
-      } 
-    }
-  }, [isAuthenticated, navigate]);
+  const [quotes, setQuotes] = useState([])
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchQuotes();
+    const fetchQuotes = async () => {
+      const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+      console.log("Fetching quotes from:", BACKEND_URL)
+      try {
+        const response = await axios.get(`${BACKEND_URL}/user/quotes`, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        console.log("Quotes response:", response.data)
+        setQuotes(response.data)
+      } catch (error) {
+        console.error("Error fetching quotes:", error.response?.data || error.message)
+      }
     }
-  }, [isAuthenticated, fetchQuotes]);
 
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    fetchQuotes()
+  }, [])
 
   return (
     <div>
@@ -58,7 +36,7 @@ const Quotes = () => {
       ) : (
         <ul>
           {quotes.map((q, index) => (
-            <li key={index}>{q.quote}</li>
+            <li className='p-4 m-2 border shadow-md rounded-md hover:border-black hover:border-1' key={index}>{q.quote}</li>
           ))}
         </ul>
       )}
