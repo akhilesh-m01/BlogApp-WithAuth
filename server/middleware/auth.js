@@ -2,23 +2,24 @@ const jwt = require('jsonwebtoken');
 
 const myLogger = async (req, res, next) => {
     try {
-        const token = req.cookies?.token;
-        console.log(req.cookies.token)
-        console.log('token:',token)
-
+        console.log("Cookies received:", req.cookies);
+        const token = req.cookies.token; // Assuming 'token' is the name of your cookie
+        
         if (!token) {
-            return res.status(401).json({ message: 'Token is required', token });
+            console.log("No token found in cookies");
+            return res.status(403).json({ message: "No token provided" });
         }
         
 
         // Verify the token
         jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
             if (err) {
+                console.log("Token verification failed:", err);
                 return res.status(401).json({ message: 'Invalid or expired token' });
             }
 
-            // Attach decoded user info to the request object
-            req.user = decoded;
+            console.log("Token verified successfully");
+            req.userId = decoded.id;
             next();
         });
     } catch (e) {
