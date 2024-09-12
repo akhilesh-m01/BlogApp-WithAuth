@@ -32,8 +32,9 @@ const GetMyBlogs = () => {
                     className='aspect-[16/9] overflow-hidden rounded-xl object-cover w-48 h-48' 
                     alt='NA'/>
                     <div>
-                        <h1>{b.title}</h1>
+                        <h1>{b.title}</h1> 
                         <p>{b.desc.split(" ").slice(0,5).join(" ")}...</p>
+                        <p>{b.user_id}</p>
                     </div>
                 </div>
             ))
