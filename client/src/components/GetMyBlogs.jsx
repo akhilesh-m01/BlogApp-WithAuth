@@ -33,7 +33,7 @@ const GetMyBlogs = () => {
                     alt='NA'/>
                     <div>
                         <h1>{b.title}</h1>
-                        <p>{b.desc.split(" ").slice(0,5).join(" ")}</p>
+                        <p>{b.desc.split(" ").slice(0,5).join(" ")}...</p>
                     </div>
                 </div>
             ))
