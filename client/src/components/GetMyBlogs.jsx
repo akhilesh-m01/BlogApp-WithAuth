@@ -9,7 +9,7 @@ const GetMyBlogs = () => {
         async function  fetchBlogs(){
             const result = await axios.get(`${BACKEND_URL}/user/getmyblogs`,{
                 withCredentials:true,
-                header:{
+                headers:{
                     'Content-Type':'application/json'
                 }
             })
