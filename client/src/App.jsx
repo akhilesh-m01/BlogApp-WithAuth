@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 import WriteBlog from "./components/WriteBlog";
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store/store'
+import Hero from "./components/Hero";
+import GetMyBlogs from "./components/GetMyBlogs";
 
 function App() {
 
@@ -24,11 +26,13 @@ function App() {
           {/* routes */}
         
           <Routes>
+            <Route path="/" element={<Hero/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/quotes" element={<Quotes/>}/>
             <Route path="/myquotes" element={<MyForm/>}/>
             <Route path="/write" element={<WriteBlog/>}/>
+            <Route path="/getmyblogs" element={<GetMyBlogs/>}/>
           </Routes>
         </Router>
 

@@ -35,4 +35,18 @@ const myblog = async (req,res) =>{
     }
 }
 
-module.exports = myblog;
+const getMyBlogs = async (req,res) =>{
+    try{
+        const resBlogs = await Blog.find();
+        console.log(resBlogs);
+        res.status(200).json(resBlogs);
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json({
+            message:"Internal server error"
+        })
+    }
+}
+
+module.exports = {myblog,getMyBlogs};

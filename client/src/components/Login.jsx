@@ -151,7 +151,7 @@ const Login = () => {
       })
       const username = luser.email.split('@')[0]
       dispatch(login({ username }))
-      navigate("/quotes")
+      navigate("/getmyblogs")
     } catch (error) {
       console.error("Login failed:", error)
     }
