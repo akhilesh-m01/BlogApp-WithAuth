@@ -14,6 +14,7 @@ const GetMyBlogs = () => {
                 }
             })
             console.log("result:",result);
+            // logging
             const data = result.data;
             console.log("data",data)
             setMyBlogs(data);
