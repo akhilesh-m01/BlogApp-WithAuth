@@ -5,8 +5,9 @@ const GetMyBlogs = () => {
     const [myBlogs,setMyBlogs] = useState([]);
 
     useEffect(()=>{
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
         async function  fetchBlogs(){
-            const result = await axios.get('http://localhost:3000/user/getmyblogs',{
+            const result = await axios.get(`${BACKEND_URL}/user/getmyblogs`,{
                 withCredentials:true,
                 header:{
                     'Content-Type':'application/json'
