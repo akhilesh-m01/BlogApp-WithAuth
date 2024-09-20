@@ -87,7 +87,7 @@ const signIn = async (req, res) => {
         .status(200)
         .cookie('token', token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'none',
             maxAge:3600000,
             path: '/',
