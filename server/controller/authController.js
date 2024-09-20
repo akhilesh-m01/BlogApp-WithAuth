@@ -2,10 +2,27 @@
 const User = require("../db/UserModel");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const {z} = require("zod");
 
 // signup
 const signup = async (req,res) =>{
+
+    // zod validation
+    const userSchema = z.object({
+        username: z.string().min(3).max(100),
+        email: z.string().email().min(3).max(100),
+        password: z.string().min(3).max(100),
+    })
+
+    const validate = userSchema.safeParse(req.body);
+
+    if(!validate.success){
+        return res.status(400).json({message:validate.error.errors[0].message});
+    }
+
     const {username,email,password} = req.body;
+
+
     console.log(req.body);
     
     try{
@@ -35,6 +52,18 @@ const signup = async (req,res) =>{
 // signin
 const signIn = async (req, res) => {
     try {
+
+        const userSchema = z.object({
+            email: z.string().email().min(3).max(100),
+            password: z.string().min(3).max(100)
+        })
+
+        const validate = userSchema.safeParse(req.body);
+
+        if(!validate.success){
+            return res.status(400).json({message:validate.error.errors[0].message});
+        }
+
         const { email, password } = req.body;
 
         // Check if the user exists
@@ -80,15 +109,23 @@ const signIn = async (req, res) => {
 
 
 // logout
-const logout = async () =>{
-    try{
-        
+const logout = async (req, res) => {
+    try {
+        // Clear the token cookie
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax',
+            path: '/'
+        });
 
+        res.status(200).json({ message: "Logged out successfully" });
     }
-    catch(e){
-        console.log("error logging out",e);
+    catch(e) {
+        console.log("Error logging out", e);
+        res.status(500).json({ message: "Error logging out" });
     }
-}
+};
 
 const quotes = async (req,res) =>{
     try{
@@ -102,4 +139,4 @@ const quotes = async (req,res) =>{
     }
 }
 
-module.exports = {signup,signIn,quotes}
+module.exports = {signup,signIn,quotes,logout}

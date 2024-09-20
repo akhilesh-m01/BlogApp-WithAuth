@@ -4,24 +4,26 @@ import React, { useEffect, useState } from 'react'
 const GetMyBlogs = () => {
     const [myBlogs,setMyBlogs] = useState([]);
 
-    useEffect(()=>{
-        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
-        async function  fetchBlogs(){
-            const result = await axios.get(`${BACKEND_URL}/user/getmyblogs`,{
-                withCredentials:true,
-                headers:{
-                    'Content-Type':'application/json'
-                }
-            })
-            console.log("result:",result);
-            // logging
-            const data = result.data;
-            console.log("data",data)
-            setMyBlogs(data);
+    useEffect(() => {
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        console.log("BACKEND_URL:", BACKEND_URL); 
+        
+        async function fetchBlogs() {
+          try {
+            const result = await axios.get(`${BACKEND_URL}/user/getmyblogs`, {
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json'
+              },
+            });
+            console.log("result:", result);
+            setMyBlogs(result.data);
+          } catch (error) {
+            console.error("Error fetching blogs:", error);
+          }
         }
         fetchBlogs();
-
-    },[])
+      }, []);
 
   return (
     <div className='flex flex-col justify-center items-center'>
